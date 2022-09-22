@@ -85,6 +85,12 @@ public class QuerydslBasicTest {
                 .where(member.username.eq("member1"))
                 .fetchOne();
 
+        Member test = queryFactory
+                .select(member)
+                .from(member)
+                .where(member.username.eq("member1"))
+                .fetchOne();
+
 
         assertThat(findMember.getUsername()).isEqualTo("member1");
     }
@@ -132,7 +138,7 @@ public class QuerydslBasicTest {
 
 
     /**
-     * 1. 회원 아니 내림차순
+     * 1. 회원 나이 내림차순
      * 2. 회원 이름 올림차순
      * 2에서 이름이 없으면 마지막에 출력
      */
