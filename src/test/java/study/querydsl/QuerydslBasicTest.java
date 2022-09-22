@@ -139,7 +139,7 @@ public class QuerydslBasicTest {
 
     /**
      * 1. 회원 나이 내림차순
-     * 2. 회원 이름 올림차순
+    * 2. 회원 이름 올림차순
      * 2에서 이름이 없으면 마지막에 출력
      */
     @Test
@@ -211,6 +211,19 @@ public class QuerydslBasicTest {
                 .join(member.team, team)
                 .groupBy(team.name)
                 .fetch();
+
+        List<Tuple> test = queryFactory
+                .select(team.name, member.age.avg())
+                .from(member)
+                .join(member.team, team)
+                .groupBy(team.name)
+                .fetch();
+
+        for (Tuple tuple : test) {
+            System.out.println(tuple);
+        }
+
+
 
         Tuple teamA = result.get(0);
         Tuple teamB = result.get(1);
